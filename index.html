@@ -182,14 +182,6 @@
             animation: fadeInText 1s ease-out 2.2s forwards;
         }
 
-        .btn-enter-story {
-            background: #ffffff;
-            color: #ff477e;
-            opacity: 0;
-            z-index: 5;
-            animation: fadeInText 1s ease-out 3s forwards;
-        }
-
         /* --- SCREEN 2: SMOOTH MULTI-PHOTO GALLERY --- */
         #screen-2 { background: #ffe5ec; justify-content: flex-start; padding-top: 30px; }
         .cake-graphic { font-size: 3.5rem; animation: float 3s infinite ease-in-out; }
@@ -288,23 +280,32 @@
             animation: textBounce 1.4s infinite ease-in-out;
         }
 
-        .letter-modal { position: absolute; top: 10%; left: 5%; width: 90%; height: 75%; background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 20; display: block; text-align: left; overflow-y: auto; }
+        .letter-modal { position: absolute; top: 10%; left: 5%; width: 90%; height: 65%; background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 20; display: block; text-align: left; overflow-y: auto; }
         .letter-modal.open { transform: translateY(0); }
         .letter-text { color: #4a4a4a; font-size: 0.95rem; line-height: 1.6; }
         .letter-text h3 { color: #ff477e; margin-bottom: 10px; width: 100%; text-align: left; }
         .letter-text p { width: 100%; text-align: left; margin-bottom: 12px; }
 
-        /* --- SCREEN 4: NEON GRAND FINALE WITH BOUNCING HEART --- */
-        #screen-4 { background-image: linear-gradient(rgba(13, 11, 17, 0.82), rgba(13, 11, 17, 0.82)), url('assets/photo1.jpg'); background-size: cover; background-position: center; overflow: hidden; }
-        
-        .neon-cake { 
-            font-size: 5rem; 
-            filter: drop-shadow(0 0 15px #ff477e) drop-shadow(0 0 30px #ff477e); 
-            animation: heartBounce 1.2s infinite ease-in-out; 
-            margin-bottom: 20px; 
-            z-index: 5; 
-            display: inline-block;
+        /* Next button container when envelope modal opens */
+        .modal-action-wrapper {
+            position: absolute;
+            bottom: 5%;
+            left: 0;
+            width: 100%;
+            z-index: 25;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
+        .modal-action-wrapper.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* --- SCREEN 4: NEON GRAND FINALE --- */
+        #screen-4 { background-image: linear-gradient(rgba(13, 11, 17, 0.82), rgba(13, 11, 17, 0.82)), url('assets/photo1.jpg'); background-size: cover; background-position: center; overflow: hidden; }
         
         .neon-text { color: #fff; font-size: 1.5rem; text-shadow: 0 0 5px #fff, 0 0 10px #ff477e, 0 0 20px #ff477e, 0 0 40px #ff477e; margin-bottom: 30px; font-weight: bold; z-index: 5; }
         .floating-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 2; }
@@ -327,30 +328,13 @@
             100% { transform: translateY(-900px) scale(1.2); opacity: 0; }
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(3deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
-        /* New Smooth Text Bouncing Animation */
         @keyframes textBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-12px); }
-        }
-
-        /* Smooth Heart Beating Animation */
-        @keyframes heartBounce {
-            0%, 100% { 
-                transform: scale(1); 
-                filter: drop-shadow(0 0 12px #ff477e);
-            }
-            30% { 
-                transform: scale(1.18); 
-                filter: drop-shadow(0 0 25px #ff477e) drop-shadow(0 0 45px #ff477e);
-            }
-            60% { 
-                transform: scale(1.06); 
-                filter: drop-shadow(0 0 18px #ff477e);
-            }
         }
         
         @keyframes floatUp {
@@ -365,6 +349,7 @@
 
     <div class="phone-container" id="main-container">
         
+        <!-- SCREEN 1 -->
         <div class="screen active" id="screen-1">
             <div class="heart-bg" id="heart-bg-container"></div>
             <div class="cake-wrapper">
@@ -373,9 +358,9 @@
                 <div class="cake-plate"></div>
             </div>
             <p class="video-text">Happy Birthday Babe ❤️</p>
-            <button class="btn-next btn-enter-story" onclick="nextScreen(2)">Click to Start ✨</button>
         </div>
 
+        <!-- SCREEN 2 -->
         <div class="screen" id="screen-2">
             <div class="cake-graphic">🎂</div>
             <h1 class="birthday-title">Happy Birthday! <br><span style="color:#ff7096">My Love</span></h1>
@@ -402,11 +387,13 @@
             <button class="btn-next" onclick="nextScreen(3)">Next ❤️</button>
         </div>
 
+        <!-- SCREEN 3 -->
         <div class="screen" id="screen-3">
             <div class="envelope" onclick="openLetter()"><div class="heart-seal">❤️</div></div>
             <p class="instruction-text">Birthday wish is ready</p>
             <p class="instruction-text"> Click the heart❤️</p>
             
+            <!-- Letter Form -->
             <div class="letter-modal" id="letterModal">
                 <div class="letter-text">
                     <h3>Happy Birthday Hsu Yee 🐰</h3>
@@ -418,13 +405,17 @@
                     <p>お誕生日おめでとう🎂</p>
                     <p>愛している💞</p>
                 </div>
+            </div>
+            
+            <!-- Next Button Outside of Letter Form -->
+            <div class="modal-action-wrapper" id="modalAction">
                 <button class="btn-next" onclick="closeLetterAndProceed()">Next ✨</button>
             </div>
         </div>
 
+        <!-- SCREEN 4 -->
         <div class="screen" id="screen-4">
             <div class="floating-container" id="floating-space"></div>
-            <!-- <div class="neon-cake">💝</div> -->
             <h2 class="neon-text">愛している💞</h2>
             <p style="color: #ffb3c6; z-index: 5; font-size: 0.9rem;">Happy Birthday 🎉</p>
         </div>
@@ -434,6 +425,17 @@
     <script>
         let floatInterval;
         let isShuffling = false;
+
+        // Auto transition setup for Screen 1 -> Screen 2 after 5 seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            initBackgroundHearts();
+            setTimeout(() => {
+                const screen1 = document.getElementById('screen-1');
+                if (screen1.classList.contains('active')) {
+                    nextScreen(2);
+                }
+            }, 5000); 
+        });
 
         function initBackgroundHearts() {
             const container = document.getElementById('heart-bg-container');
@@ -449,14 +451,12 @@
                 }, i * 200);
             }
         }
-        initBackgroundHearts();
 
         function shuffleCard(clickedCard) {
             if (isShuffling || !clickedCard.classList.contains('pos-1')) return;
             isShuffling = true;
 
             const gallery = document.getElementById('gallery-stack');
-
             clickedCard.classList.add('slide-out');
 
             setTimeout(() => {
@@ -466,14 +466,12 @@
                 const updatedCards = Array.from(gallery.children);
                 updatedCards.forEach((card, index) => {
                     card.classList.remove('pos-1', 'pos-2', 'pos-3', 'pos-4', 'pos-hidden');
-                    
                     if (index === 0) card.classList.add('pos-1');
                     else if (index === 1) card.classList.add('pos-2');
                     else if (index === 2) card.classList.add('pos-3');
                     else if (index === 3) card.classList.add('pos-4');
                     else card.classList.add('pos-hidden');
                 });
-
                 setTimeout(() => { isShuffling = false; }, 150);
             }, 550); 
         }
@@ -484,9 +482,14 @@
             if(screenNum === 4) { generateFloatingTexts(); } else { clearInterval(floatInterval); }
         }
 
-        function openLetter() { document.getElementById('letterModal').classList.add('open'); }
+        function openLetter() { 
+            document.getElementById('letterModal').classList.add('open'); 
+            document.getElementById('modalAction').classList.add('show');
+        }
+        
         function closeLetterAndProceed() {
             document.getElementById('letterModal').classList.remove('open');
+            document.getElementById('modalAction').classList.remove('show');
             setTimeout(() => { nextScreen(4); }, 300);
         }
 
