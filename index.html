@@ -363,7 +363,7 @@
         <!-- SCREEN 2 -->
         <div class="screen" id="screen-2">
             <div class="cake-graphic">🎂</div>
-            <h1 class="birthday-title">Happy Birthday! <br><span style="color:#ff7096">My Love</span></h1>
+            <h1 class="birthday-title">Happy Birthday! <br><span style="color:#ff7096">Hsu Yee</span></h1>
             
             <div class="photo-gallery" id="gallery-stack">
                 <div class="polaroid pos-1" onclick="shuffleCard(this)">
@@ -439,7 +439,7 @@
 
         function initBackgroundHearts() {
             const container = document.getElementById('heart-bg-container');
-            const icons = ['❤️', '💖', '💝', '💕', '💗', '💓'];
+            const icons = ['❤️', '💖', '💝', '💕', '💗', '💓','💘'];
             for(let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('span');
@@ -496,7 +496,7 @@
         function generateFloatingTexts() {
             clearInterval(floatInterval);
             const container = document.getElementById('floating-space');
-            const messages = ["Love U 💕", "Today is your day!", "Hsu Yee's day 🎂", "Wish you all the best!!", "My Universe 🌌", "Love u to the moon and back!👩‍❤️‍👨", "Stay strong, Stay Pretty ✨", "Sweet 22", "愛している💞", "お誕生日おめでとう🎂"];
+            const messages = ["Love U 💕", "Today is your day🐰", "Hsu Yee's day 🎂", "Wish you all the best👀", "My Universe 🌌", "Love u to the moon and back!👩‍❤️‍👨", "Stay strong, Stay Pretty ✨", "Sweet 21🐰", "愛している💞", "お誕生日おめでとう🎂"];
             floatInterval = setInterval(() => {
                 const span = document.createElement('div');
                 span.classList.add('floating-msg');
